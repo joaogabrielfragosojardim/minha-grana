@@ -1,11 +1,11 @@
 import { Container } from "../Components/ContainerPage";
 import { PageTitle } from "../Components/PageTitle";
 
-export const Home = () => {
+export const Transactions = () => {
   return (
     <>
       <Container>
-        <PageTitle title="Home" />
+        <PageTitle title="Transactions" />
       </Container>
     </>
   );

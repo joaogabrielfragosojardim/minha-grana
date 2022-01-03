@@ -1,14 +1,18 @@
 import "./App.css";
-import Home from "../src/Pages/Home";
 import styled from "styled-components";
-import Sidebar from "./Components/Sidebar";
+
+import { BrowserRouter } from "react-router-dom";
+import { Sidebar } from "./Components/Sidebar";
+import RoutesIndex from "./routes";
 
 function App() {
   return (
-    <Body className="App">
-      <Home />
-      <Sidebar />
-    </Body>
+    <BrowserRouter>
+      <Body>
+        <Sidebar />
+        <RoutesIndex />
+      </Body>
+    </BrowserRouter>
   );
 }
 
