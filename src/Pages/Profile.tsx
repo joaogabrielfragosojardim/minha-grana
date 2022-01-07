@@ -5,7 +5,7 @@ import { useState } from "react";
 import { AddAccount } from "../Components/AddAccount";
 
 export const Profile = () => {
-  const [accounts, setAccounts] = useState([]);
+  const [accounts] = useState([]);
   const user = "João";
 
   const data = new Date();
