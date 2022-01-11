@@ -82,7 +82,7 @@ export const BackgroundModal = styled.div<PropsModal>`
   justify-content: center;
 `;
 
-export const ModalAnimation = keyframes`
+export const ModalAnimationOn = keyframes`
 from {
   opacity: 0;
   transform: translate3d(0, -80px, 0)
@@ -94,11 +94,22 @@ to {
 }
 `;
 
+export const ModalAnimationOut = keyframes`
+from {
+  opacity: 1;
+  transform: translate3d(0, 0, 0)
+}
+to {
+  opacity: 0;
+  transform: translate3d(0, -80px, 0)
+}
+`;
+
 export const Modal = styled.div`
   background-color: white;
   padding: 35px;
   border-radius: 15px;
-  animation: ${ModalAnimation} 1s;
+  animation: ${ModalAnimationOn} 1s;
 `;
 
 export const ModalTitle = styled.div`

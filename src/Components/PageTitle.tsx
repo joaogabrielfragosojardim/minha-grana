@@ -1,7 +1,7 @@
-type Title = {
+interface Title {
   title: string;
-};
+}
 
-export const PageTitle = (props: Title) => {
-  return <h2>{props.title}</h2>;
+export const PageTitle = ({ title }: Title) => {
+  return <h2>{title}</h2>;
 };

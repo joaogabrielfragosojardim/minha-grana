@@ -1,7 +1,6 @@
-import { Container } from "../Components/ContainerPage";
-
 import { useState } from "react";
 
+import { Container } from "../Components/ContainerPage";
 import { AddAccount } from "../Components/AddAccount";
 
 export const Profile = () => {
@@ -23,7 +22,7 @@ export const Profile = () => {
         </div>
         <div>
           <h3>Your Accounts</h3>
-          {accounts.length ? null : <AddAccount />}
+          {accounts.length ? <div>aaaa</div> : <AddAccount />}
         </div>
       </Container>
     </>
