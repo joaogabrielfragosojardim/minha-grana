@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import sidebarData from "../data/sidebarData";
+import sidebarData from "../utils/sidebarData";
 import { IoIosClose } from "react-icons/io";
 import { AiOutlineMenu } from "react-icons/ai";
 

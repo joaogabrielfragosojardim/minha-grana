@@ -6,6 +6,7 @@ import { InputTypeText } from "./InputTypeText";
 import { InputTypeColor } from "./InputTypeColor";
 
 import { useState, useEffect } from "react";
+import { RootStateOrAny, useSelector } from "react-redux";
 
 interface BankTitle {
   colorBankTitle: string;
@@ -20,6 +21,10 @@ interface PropsModal {
 export const AddAccountModal = ({ modalOpen, setModalOpen }: PropsModal) => {
   const [bankName, setBankName] = useState("");
   const [bankColor, setBankColor] = useState("");
+
+  const bankAccountRedux = useSelector((state: RootStateOrAny) => state);
+
+  console.log("teste", bankAccountRedux.bankAccounts);
 
   useEffect(() => {
     const randomColors = ["#622a9d", "#fa7500", "#00fa04", "#d60000"];
@@ -59,9 +64,14 @@ export const AddAccountModal = ({ modalOpen, setModalOpen }: PropsModal) => {
               </ContainerInputs>
             </form>
             <ContainerBigBank>
-              <TitleBigBank colorBankTitle={bankColor} bankName={bankName}>
-                {bankName === "" ? "Bank Name..." : bankName}
-              </TitleBigBank>
+              <div>
+                <TitleBigBank colorBankTitle={bankColor} bankName={bankName}>
+                  {bankName === "" ? "Bank Name..." : bankName}
+                </TitleBigBank>
+              </div>
+              <AddBankAccountDiv>
+                <AddBankAccount>Add Account</AddBankAccount>
+              </AddBankAccountDiv>
             </ContainerBigBank>
           </Divider>
         </Modal>
@@ -144,8 +154,18 @@ export const ContainerInputs = styled.div`
 `;
 
 export const ContainerBigBank = styled.div`
-  padding: 50px;
-  min-width: 300px;=
+  padding: 0px 50px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  div {
+    &:first-child {
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 `;
 
 export const TitleBigBank = styled.h3<BankTitle>`
@@ -153,4 +173,18 @@ export const TitleBigBank = styled.h3<BankTitle>`
   font-size: 28px;
   border-bottom: ${(props) =>
     props.bankName ? `solid 2px ${props.colorBankTitle}` : ""};
+`;
+
+export const AddBankAccountDiv = styled.div`
+  text-align: right;
+`;
+
+export const AddBankAccount = styled.button`
+  background-color: #100f12;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius 15px;
+  align-self: end;
+  justify-self: end
 `;

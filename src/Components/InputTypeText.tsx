@@ -12,7 +12,7 @@ export const InputTypeText = ({ label, placeholder, setBankName }: Props) => {
       <label>{label}</label>
       <InputText
         placeholder={placeholder}
-        maxLength={50}
+        maxLength={25}
         onChange={(e) => {
           setBankName(e.target.value);
         }}
