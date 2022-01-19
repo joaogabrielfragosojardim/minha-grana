@@ -6,7 +6,8 @@ import { InputTypeText } from "./InputTypeText";
 import { InputTypeColor } from "./InputTypeColor";
 
 import { useState, useEffect } from "react";
-import { RootStateOrAny, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addAccounts } from "../Store/BankAccounts/BankAccounts.actions";
 
 interface BankTitle {
   colorBankTitle: string;
@@ -18,19 +19,42 @@ interface PropsModal {
   setModalOpen?: Function;
 }
 
+export interface IBankAccount {
+  name: string;
+  color: string;
+}
+
 export const AddAccountModal = ({ modalOpen, setModalOpen }: PropsModal) => {
-  const [bankName, setBankName] = useState("");
-  const [bankColor, setBankColor] = useState("");
+  const [bankAccount, setBankAccount] = useState<IBankAccount>({
+    name: "",
+    color: "",
+  });
 
-  const bankAccountRedux = useSelector((state: RootStateOrAny) => state);
-
-  console.log("teste", bankAccountRedux.bankAccounts);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const randomColors = ["#622a9d", "#fa7500", "#00fa04", "#d60000"];
     const colorLength = Math.floor(Math.random() * randomColors.length);
-    setBankColor(randomColors[colorLength]);
+    setBankAccount((prev: IBankAccount) => {
+      return {
+        ...prev,
+        color: randomColors[colorLength],
+      };
+    });
   }, []);
+
+  const handleButton = () => {
+    dispatch(addAccounts(bankAccount));
+  };
+
+  const handleBankName = (name: string) => {
+    setBankAccount((prev: IBankAccount) => {
+      return {
+        ...prev,
+        name: name,
+      };
+    });
+  };
 
   return (
     <>
@@ -52,25 +76,30 @@ export const AddAccountModal = ({ modalOpen, setModalOpen }: PropsModal) => {
                 <InputTypeText
                   label={"Bank Name"}
                   placeholder={"type a bank name"}
-                  setBankName={setBankName}
+                  handleBankName={handleBankName}
                 />
               </ContainerInputs>
               <ContainerInputs>
                 <InputTypeColor
                   label="Choose a color"
-                  setBankColor={setBankColor}
-                  bankColor={bankColor}
+                  setBankAccount={setBankAccount}
+                  bankAccount={bankAccount}
                 />
               </ContainerInputs>
             </form>
             <ContainerBigBank>
               <div>
-                <TitleBigBank colorBankTitle={bankColor} bankName={bankName}>
-                  {bankName === "" ? "Bank Name..." : bankName}
+                <TitleBigBank
+                  colorBankTitle={bankAccount.color}
+                  bankName={bankAccount.name}
+                >
+                  {bankAccount.name === "" ? "Bank Name..." : bankAccount.name}
                 </TitleBigBank>
               </div>
               <AddBankAccountDiv>
-                <AddBankAccount>Add Account</AddBankAccount>
+                <AddBankAccount onClick={handleButton}>
+                  Add Account
+                </AddBankAccount>
               </AddBankAccountDiv>
             </ContainerBigBank>
           </Divider>
@@ -186,5 +215,6 @@ export const AddBankAccount = styled.button`
   padding: 10px;
   border-radius 15px;
   align-self: end;
-  justify-self: end
+  justify-self: end;
+  cursor: pointer;
 `;

@@ -3,10 +3,10 @@ import styled from "styled-components";
 interface Props {
   label: String;
   placeholder: string;
-  setBankName: Function;
+  handleBankName: Function;
 }
 
-export const InputTypeText = ({ label, placeholder, setBankName }: Props) => {
+export const InputTypeText = ({ label, placeholder, handleBankName }: Props) => {
   return (
     <>
       <label>{label}</label>
@@ -14,7 +14,7 @@ export const InputTypeText = ({ label, placeholder, setBankName }: Props) => {
         placeholder={placeholder}
         maxLength={25}
         onChange={(e) => {
-          setBankName(e.target.value);
+          handleBankName(e.target.value);
         }}
       />
     </>

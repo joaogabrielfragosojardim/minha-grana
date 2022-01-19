@@ -1,20 +1,25 @@
 import { HexColorPicker } from "react-colorful";
 import styled from "styled-components";
+import { IBankAccount } from "./AddAccountModal";
 
-interface Props {
+interface InputProps {
   label: string;
-  bankColor: string;
-  setBankColor: Function;
+  bankAccount: IBankAccount;
+  setBankAccount: Function;
 }
 
-export const InputTypeColor = ({ label, bankColor, setBankColor }: Props) => {
+export const InputTypeColor = ({
+  label,
+  bankAccount,
+  setBankAccount,
+}: InputProps) => {
   return (
     <>
       <InputLabel>{label}</InputLabel>
       <HexColorPicker
-        color={bankColor}
+        color={bankAccount.color}
         onChange={(color) => {
-          setBankColor(color);
+          setBankAccount({ ...bankAccount, color: color });
         }}
       />
     </>

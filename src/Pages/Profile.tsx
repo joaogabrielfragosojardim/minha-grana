@@ -1,11 +1,13 @@
-import { useState } from "react";
-
 import { Container } from "../Components/ContainerPage";
 import { AddAccount } from "../Components/AddAccount";
 
+import { RootStateOrAny, useSelector } from "react-redux";
+
 export const Profile = () => {
-  const [accounts] = useState([]);
   const user = "João";
+
+  const bankAccountRedux = useSelector((state: RootStateOrAny) => state.bankAccounts);
+  console.log(bankAccountRedux);
 
   const data = new Date();
   const day = String(data.getDate()).padStart(2, "0");
@@ -22,7 +24,7 @@ export const Profile = () => {
         </div>
         <div>
           <h3>Your Accounts</h3>
-          {accounts.length ? <div>aaaa</div> : <AddAccount />}
+          {bankAccountRedux.length ? <div>aaaa</div> : <AddAccount />}
         </div>
       </Container>
     </>

@@ -1,7 +1,14 @@
-export const BankAccountsReducer = (state: string[] = [], action: any) => {
+type action = {
+  type: string;
+  payload: string[];
+};
+
+const INITAL_STATE = [] as object[];
+
+export const BankAccountsReducer = (state = INITAL_STATE, action: action) => {
   switch (action.type) {
     case "ADD_ACCOUNT":
-      return action.payload;
+      return [...state, { ...action.payload }];
 
     default:
       return state;
